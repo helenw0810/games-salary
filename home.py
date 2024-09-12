@@ -12,10 +12,10 @@ def categorize_role_field_with_user_research(job_title):
     job_title = job_title.lower()
     if any(keyword in job_title for keyword in ['business', 'brand']):
         return 'Business'
-    elif any(keyword in job_title for keyword in ['marketing', 'media', 'community','communication','pr','influencer']):
-        return 'Marketing'
     elif any(keyword in job_title for keyword in ['engineer', 'developer', 'programmer','programme','programer']):
         return 'Engineering'
+    elif any(keyword in job_title for keyword in ['marketing', 'media', 'community','communication','pr','influencer']):
+        return 'Marketing'
     elif any(keyword in job_title for keyword in ['designer', 'level designer', 'ui', 'ux', 'user researcher']):
         return 'Design'
     elif any(keyword in job_title for keyword in ['artist', 'animator', 'creative', 'writer', 'art']):
