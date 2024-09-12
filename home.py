@@ -97,18 +97,21 @@ def display_global_data(df):
 # Title of the app
 st.title('👾 Games Salary Dashboard')
 
-# --- Filters Section (applies to both US and Global datasets) ---
+col1, col2, col3 = st.columns([1.5, 1, 1])
 
 # Search bar for job title
-search_term = st.text_input('Search for Job Title', '')
+with col1:
+    search_term = st.text_input('Search by Job Title', '')
 
 # Department/Role filter (multiselect)
-departments = pd.concat([us_processed_df['Role Field/Scope'], global_processed_df['Role Field/Scope']]).unique()
-selected_department = st.multiselect('Filter by Department (Role/Scope)', departments)
+with col2:
+    departments = pd.concat([us_processed_df['Role Field/Scope'], global_processed_df['Role Field/Scope']]).unique()
+    selected_department = st.multiselect('Department', departments)
 
 # Seniority Level filter (multiselect)
-levels = pd.concat([us_processed_df['Seniority Level'], global_processed_df['Seniority Level']]).unique()
-selected_level = st.multiselect('Filter by Seniority Level', levels)
+with col3:
+    levels = pd.concat([us_processed_df['Seniority Level'], global_processed_df['Seniority Level']]).unique()
+    selected_level = st.multiselect('Seniority Level', levels)
 
 # --- US Salaries Section ---
 st.header('US Salaries')
