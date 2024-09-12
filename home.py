@@ -8,6 +8,40 @@ file_path = './data/salary_data.xlsx'  # Adjust the file path if necessary
 us_processed_df = pd.read_excel(file_path, sheet_name=0)
 global_processed_df = pd.read_excel(file_path, sheet_name=1)
 
+def categorize_role_field_with_user_research(job_title):
+    job_title = job_title.lower()
+    if any(keyword in job_title for keyword in ['business', 'brand']):
+        return 'Business'
+    elif any(keyword in job_title for keyword in ['marketing', 'media', 'community','communication','pr','influencer']):
+        return 'Marketing'
+    elif any(keyword in job_title for keyword in ['engineer', 'developer', 'programmer','programme','programer']):
+        return 'Engineering'
+    elif any(keyword in job_title for keyword in ['designer', 'level designer', 'ui', 'ux', 'user researcher']):
+        return 'Design'
+    elif any(keyword in job_title for keyword in ['artist', 'animator', 'creative', 'writer', 'art']):
+        return 'Art'
+    elif any(keyword in job_title for keyword in ['producer', 'production']):
+        return 'Production'
+    elif any(keyword in job_title for keyword in ['qa', 'tester', 'quality assurance','qc','quality']):
+        return 'QA/Testing'
+    else:
+        return 'Other'
+
+def categorize_seniority_with_associate(job_title):
+    job_title = job_title.lower()
+    if any(keyword in job_title for keyword in ['senior', 'lead', 'head', 'manager', 'director', 'level 3','principal','principle','advanced']):
+        return 'Senior/Lead Level'
+    elif any(keyword in job_title for keyword in ['associate', 'mid', 'specialist', 'level 2']):
+        return 'Mid-Level'
+    else:
+        return 'Junior/Entry Level'
+    
+us_processed_df['Role Field/Scope'] = us_processed_df['Job Title'].apply(categorize_role_field_with_user_research)
+global_processed_df['Role Field/Scope'] = global_processed_df['Job Title'].apply(categorize_role_field_with_user_research)
+
+us_processed_df['Seniority Level'] = us_processed_df['Job Title'].apply(categorize_seniority_with_associate)
+global_processed_df['Seniority Level'] = global_processed_df['Job Title'].apply(categorize_seniority_with_associate)
+
 conversion_dict = {
     'argentina': 0.00105,
     'australia': 0.65,
@@ -58,7 +92,6 @@ conversion_dict = {
     'ukraine': 0.027,  # Ukrainian Hryvnia to USD
     'united kingdom': 1.31  # British Pound to USD
 }
-
 
 def display_us_data(df):
     # For US data: Move department and level of the role to the end of the columns for display purposes
