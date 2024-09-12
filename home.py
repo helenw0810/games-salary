@@ -12,6 +12,8 @@ def categorize_role_field_with_user_research(job_title):
     job_title = job_title.lower()
     if any(keyword in job_title for keyword in ['business', 'brand']):
         return 'Business'
+    elif any(keyword in job_title for keyword in ['producer', 'production']):
+        return 'Production'
     elif any(keyword in job_title for keyword in ['engineer', 'developer', 'programmer','programme','programer']):
         return 'Engineering'
     elif any(keyword in job_title for keyword in ['marketing', 'media', 'community','communication','pr','influencer']):
@@ -20,8 +22,6 @@ def categorize_role_field_with_user_research(job_title):
         return 'Design'
     elif any(keyword in job_title for keyword in ['artist', 'animator', 'creative', 'writer', 'art']):
         return 'Art'
-    elif any(keyword in job_title for keyword in ['producer', 'production']):
-        return 'Production'
     elif any(keyword in job_title for keyword in ['qa', 'tester', 'quality assurance','qc','quality']):
         return 'QA/Testing'
     else:
